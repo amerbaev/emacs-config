@@ -1,0 +1,1 @@
+("~/projects/go/src/begemotik-go/begemotik-graph/")
