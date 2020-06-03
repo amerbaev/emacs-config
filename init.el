@@ -6,6 +6,8 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (package-initialize)
 
+(require 'auto-package-update)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -14,10 +16,10 @@
  '(custom-enabled-themes (quote (cyberpunk)))
  '(custom-safe-themes
    (quote
-    ("81c3852e1d8175b269375ed9f558db07c410a88ff1c1efd4129a708a9b62efa4" "d1cc05d755d5a21a31bced25bed40f85d8677e69c73ca365628ce8024827c9e3" default)))
+    ("b66970f42d765a40fdb2b6b86dd2ab6289bed518cf4d8973919e5f24f0ca537b" "81c3852e1d8175b269375ed9f558db07c410a88ff1c1efd4129a708a9b62efa4" "d1cc05d755d5a21a31bced25bed40f85d8677e69c73ca365628ce8024827c9e3" default)))
  '(package-selected-packages
    (quote
-    (diff-hl go-projectile go-mode cyberpunk-theme sublimity persistent-soft ergoemacs-mode)))
+    (auto-package-update diff-hl go-projectile go-mode cyberpunk-theme sublimity persistent-soft ergoemacs-mode)))
  '(tool-bar-mode nil)
  '(tooltip-mode nil))
 (custom-set-faces
