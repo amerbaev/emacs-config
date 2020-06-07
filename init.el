@@ -1,49 +1,93 @@
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+(setq visible-bell 1)
+;; (require 'sublimity-scroll)
+;; (sublimity-mode 1)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (when no-ssl (warn "\
+Your version of Emacs does not support SSL connections,
+which is unsafe because it allows man-in-the-middle attacks.
+There are two things you can do about this warning:
+1. Install an Emacs version that does support SSL and be safe.
+2. Remove this warning from your init file so you won't see it again."))
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+  ;; and `package-pinned-packages`. Most users will not need or want to do this.
+  ;;(add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  )
 (package-initialize)
 
-(require 'auto-package-update)
+(straight-use-package 'use-package)
+(require 'use-package)
+
+;; Tell straight to install the package for each use-package declaration
+(setq straight-use-package-by-default t)
+
+;; Ergoemacs
+(use-package ergoemacs-mode
+  :init
+  ;; (setq ergoemacs-theme nil)
+  (setq ergoemacs-keyboard-layout "us")
+  :config
+  (ergoemacs-mode 1))
+
+(use-package cyberpunk-theme
+  :config
+  (load-theme `cyberpunk t))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes (quote (cyberpunk)))
  '(custom-safe-themes
    (quote
-    ("b66970f42d765a40fdb2b6b86dd2ab6289bed518cf4d8973919e5f24f0ca537b" "81c3852e1d8175b269375ed9f558db07c410a88ff1c1efd4129a708a9b62efa4" "d1cc05d755d5a21a31bced25bed40f85d8677e69c73ca365628ce8024827c9e3" default)))
- '(package-selected-packages
-   (quote
-    (auto-package-update diff-hl go-projectile go-mode cyberpunk-theme sublimity persistent-soft ergoemacs-mode)))
- '(tool-bar-mode nil)
- '(tooltip-mode nil))
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ ;; '(default ((t (:family "Fira Code" :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
  )
 
-(global-diff-hl-mode)
-
-;; Sublimity
-(require 'sublimity)
-(require 'sublimity-scroll)
-(sublimity-mode 1)
-
-;; Ergoemacs
-(require 'ergoemacs-mode)
-(setq ergoemacs-theme nil)
-(setq ergoemacs-keyboard-layout "us")
-(ergoemacs-mode 1)
+;; (global-diff-hl-mode)
 
 ;; Projectile
-(require 'projectile)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-(projectile-mode 1)
+;; (use-package projectile
+;;   :bind (("s-p" . projectile-command-map)
+;; 	 ("C-c p" . projectile-command-map))
+;;   :config
+;;   (projectile-mode 1))
+
+;; Helm
+(use-package helm
+  :config
+  (helm-mode 1))
+
+(use-package org
+  :init
+  (setq org-directory "~/notes")
+  (setq org-agenda-files `("~/notes")))
+;;  (setq org-refile-targets `(org-agenda-files :maxlevel . 9)))
