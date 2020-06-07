@@ -32,10 +32,18 @@
   (ergoemacs-mode 1))
 
 (use-package org
+  :straight nil
   :init
   (setq org-directory "~/notes")
   (setq org-agenda-files `("~/notes"))
   (setq org-refile-targets `(org-agenda-files :maxlevel . 9)))
+
+(use-package visual-line-mode
+  :straight nil
+  :hook org-mode)
+
+(use-package writeroom-mode
+  :hook org-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -70,5 +78,3 @@
 (use-package spacemacs-theme
   :defer t
   :init (load-theme 'spacemacs-dark t))
-
-(use-package writeroom-mode)
