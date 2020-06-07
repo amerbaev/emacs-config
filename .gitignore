@@ -1,6 +1,4 @@
-*.eld
-recentf
-*~
+*
 
-auto-save-list/
-var/
+!.gitignore
+!.init.el
