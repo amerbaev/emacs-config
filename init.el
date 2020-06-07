@@ -89,5 +89,5 @@ There are two things you can do about this warning:
 (use-package org
   :init
   (setq org-directory "~/notes")
-  (setq org-agenda-files `("~/notes")))
-;;  (setq org-refile-targets `(org-agenda-files :maxlevel . 9)))
+
+(use-package writeroom-mode)
