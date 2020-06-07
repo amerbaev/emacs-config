@@ -52,9 +52,11 @@ There are two things you can do about this warning:
   :config
   (ergoemacs-mode 1))
 
-(use-package cyberpunk-theme
-  :config
-  (load-theme `cyberpunk t))
+(use-package org
+  :init
+  (setq org-directory "~/notes")
+  (setq org-agenda-files `("~/notes"))
+  (setq org-refile-targets `(org-agenda-files :maxlevel . 9)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -86,8 +88,8 @@ There are two things you can do about this warning:
   :config
   (helm-mode 1))
 
-(use-package org
-  :init
-  (setq org-directory "~/notes")
+(use-package spacemacs-theme
+  :defer t
+  :init (load-theme 'spacemacs-dark t))
 
 (use-package writeroom-mode)
