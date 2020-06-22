@@ -34,15 +34,12 @@
 (use-package org
   :straight nil
   :init
-  (setq org-directory "~/notes")
-  (setq org-agenda-files `("~/notes"))
+  (setq org-directory "~/org")
+  (setq org-agenda-files `("~/org"))
   (setq org-refile-targets `(org-agenda-files :maxlevel . 9)))
 
 (use-package visual-line-mode
   :straight nil
-  :hook org-mode)
-
-(use-package writeroom-mode
   :hook org-mode)
 
 (custom-set-variables
@@ -52,26 +49,13 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default)))
- '(writeroom-fullscreen-effect (quote maximized))
- '(writeroom-global-effects
-   (quote
-    (writeroom-set-alpha writeroom-set-tool-bar-lines writeroom-set-vertical-scroll-bars)))
- '(writeroom-mode-line t)
- '(writeroom-width 120))
+    ("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Fira Code" :foundry "outline" :slant normal :weight normal :height 113 :width normal)))))
-
-;; Projectile
-;; (use-package projectile
-;;   :bind (("s-p" . projectile-command-map)
-;; 	 ("C-c p" . projectile-command-map))
-;;   :config
-;;   (projectile-mode 1))
 
 ;; Helm
 (use-package helm
@@ -81,3 +65,11 @@
 (use-package spacemacs-theme
   :defer t
   :init (load-theme 'spacemacs-dark t))
+
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
