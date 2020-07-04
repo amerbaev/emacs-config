@@ -1,8 +1,6 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (setq visible-bell 1)
-;; (require 'sublimity-scroll)
-;; (sublimity-mode 1)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -26,7 +24,6 @@
 ;; Ergoemacs
 (use-package ergoemacs-mode
   :init
-  ;; (setq ergoemacs-theme nil)
   (setq ergoemacs-keyboard-layout "us")
   :config
   (ergoemacs-mode 1))
