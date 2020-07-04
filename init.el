@@ -60,9 +60,8 @@
   :config
   (helm-mode 1))
 
-(use-package spacemacs-theme
-  :defer t
-  :init (load-theme 'spacemacs-dark t))
+(use-package doom-themes
+  :init (load-theme `doom-one t))
 
 (use-package centaur-tabs
   :demand
