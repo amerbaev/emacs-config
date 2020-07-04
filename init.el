@@ -17,6 +17,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (setq visible-bell 1)
+(setq calendar-week-start-day 1)
 
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -49,7 +50,8 @@
   :init
   (setq org-directory "~/org")
   (setq org-agenda-files `("~/org"))
-  (setq org-refile-targets `(org-agenda-files :maxlevel . 9)))
+  (setq org-refile-targets `(org-agenda-files :maxlevel . 9))
+  (setq org-agenda-start-on-weekday 1))
 
 (use-package visual-line-mode
   :straight nil
